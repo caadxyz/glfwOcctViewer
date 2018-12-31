@@ -1,4 +1,4 @@
-# glfw-occt-demo
+# glfw-occt
 a simple demo for opencascade and glfw
 
 classplatform: win10, apple
