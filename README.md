@@ -2,7 +2,7 @@
 a simple demo for opencascade and glfw
 
 classplatform: win10, apple
-
+required: occt7.3 glew glfw
 
 ubuntu: 
 
