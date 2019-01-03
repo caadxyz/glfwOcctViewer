@@ -3,15 +3,15 @@
 #include <GLFW/glfw3.h>
 #include <Aspect_Window.hxx>
 
-class OCCWindow;
+class OccWindow;
 
-class OCCWindow : public Aspect_Window
+class OccWindow : public Aspect_Window
 {
 public:
 
-  OCCWindow(GLFWwindow* window );
+  OccWindow(GLFWwindow* window );
   void Destroy();
-  ~OCCWindow()
+  ~OccWindow()
   {
     Destroy();
   }
@@ -38,7 +38,7 @@ public:
   Standard_Real Ratio() const;
   void Size( Standard_Integer& theWidth, Standard_Integer& theHeight ) const;
   Aspect_FBConfig NativeFBConfig() const Standard_OVERRIDE { return NULL; }
-  DEFINE_STANDARD_RTTIEXT(OCCWindow,Aspect_Window)
+  DEFINE_STANDARD_RTTIEXT(OccWindow,Aspect_Window)
 
 //protected:
   Standard_Integer myXLeft;

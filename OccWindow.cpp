@@ -5,13 +5,16 @@
 #elif defined (_WIN32)
     #define GLFW_EXPOSE_NATIVE_WIN32
     #define GLFW_EXPOSE_NATIVE_WGL
+#else
+    #define GLFW_EXPOSE_NATIVE_X11
+    #define GLFW_EXPOSE_NATIVE_GLX
 #endif
 #include <GLFW/glfw3native.h>
-#include "occwindow.h"
+#include "OccWindow.h"
 
-IMPLEMENT_STANDARD_RTTIEXT(OCCWindow, Aspect_Window)
+IMPLEMENT_STANDARD_RTTIEXT(OccWindow, Aspect_Window)
 
-OCCWindow::OCCWindow (GLFWwindow* window)
+OccWindow::OccWindow (GLFWwindow* window)
 {
   if(window==NULL)
       return;
@@ -26,42 +29,43 @@ OCCWindow::OCCWindow (GLFWwindow* window)
   myYBottom = ypos+height;
 }
 
-void OCCWindow::Destroy()
+void OccWindow::Destroy()
 {
   mWindow = NULL;
 }
 
-
-Aspect_Drawable OCCWindow::NativeParentHandle() const
+Aspect_Drawable OccWindow::NativeParentHandle() const
 {
     return 0;
 }
 
-Aspect_Drawable OCCWindow::NativeHandle() const
+Aspect_Drawable OccWindow::NativeHandle() const
 {
 #if defined (__APPLE__)
   return (Aspect_Drawable)glfwGetCocoaWindow(mWindow);
 #elif defined (_WIN32)
   return (Aspect_Drawable)glfwGetWin32Window(mWindow);
+#else 
+  return (Aspect_Drawable)glfwGetX11Window(mWindow);
 #endif
 }
 
-Standard_Boolean OCCWindow::IsMapped() const
+Standard_Boolean OccWindow::IsMapped() const
 { 
   return glfwGetWindowAttrib(mWindow, GLFW_VISIBLE);
 }
 
-void OCCWindow::Map() const
+void OccWindow::Map() const
 {
   glfwShowWindow(mWindow);
 }
 
-void OCCWindow::Unmap() const
+void OccWindow::Unmap() const
 {
   glfwHideWindow(mWindow);
 }
 
-Aspect_TypeOfResize OCCWindow::DoResize() const
+Aspect_TypeOfResize OccWindow::DoResize() const
 {
   int aMask = 0;
   Aspect_TypeOfResize aMode = Aspect_TOR_UNKNOWN;
@@ -119,14 +123,14 @@ Aspect_TypeOfResize OCCWindow::DoResize() const
   return aMode;
 }
 
-Standard_Real OCCWindow::Ratio() const
+Standard_Real OccWindow::Ratio() const
 {
   int width, height;
   glfwGetWindowSize(mWindow, &width, &height);
   return Standard_Real( width ) / Standard_Real( height );
 }
 
-void OCCWindow::Size ( Standard_Integer& theWidth, Standard_Integer& theHeight ) const
+void OccWindow::Size ( Standard_Integer& theWidth, Standard_Integer& theHeight ) const
 {
   int width, height;
   glfwGetWindowSize(mWindow, &width, &height);
@@ -134,7 +138,7 @@ void OCCWindow::Size ( Standard_Integer& theWidth, Standard_Integer& theHeight )
   theHeight = height;
 }
 
-void OCCWindow::Position ( Standard_Integer& theX1, Standard_Integer& theY1,
+void OccWindow::Position ( Standard_Integer& theX1, Standard_Integer& theY1,
                             Standard_Integer& theX2, Standard_Integer& theY2 ) const
 {
 
