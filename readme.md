@@ -1,5 +1,5 @@
 a sample based on GLFW for demonstrating usage of OCCT 3D Viewer  
-classplatform: windows, mac, linux   
+crossplatform: windows, mac, linux   
 required: occt glfw  
 
 it has become a offical sample in occt7.4 
