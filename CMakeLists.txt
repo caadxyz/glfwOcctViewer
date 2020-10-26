@@ -24,6 +24,8 @@ source_group ("Sources" FILES
 find_package(OpenGL REQUIRED)
 
 # Open CASCADE Technology
+# set(OpenCASCADE_DIR "/usr/local/Cellar/opencascade/7.4.0_1/lib/cmake/opencascade")
+
 find_package(OpenCASCADE REQUIRED NO_DEFAULT_PATH)
 if (OpenCASCADE_FOUND)
   message (STATUS "Using OpenCASCADE from \"${OpenCASCADE_DIR}\"" )
